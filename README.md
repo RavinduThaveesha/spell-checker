@@ -1,11 +1,13 @@
 # spell-checker
-Spelling mistakes are categorized in two types namely non-word and real-word errors. This spell-checker can detect real-word and non-word errors and suggest fixes.
+This class can detect incorrectly spelled words and suggest fixes.
 
-# to run the application
+It takes a given text string and checks its words against a dictionary of words known to be valid to determine if they are correct.
 
-cd proejct folder 
-python manage.py runserver
+For words that seem to be incorrect, it suggest words that are similar and seem to be correct versions of those words.
 
-Enjoy :)
+This is a part of post graduate module project and bigram,unigram,dictionary lookup and probability techniques used to develop this class. 
+
+
+
 
 
