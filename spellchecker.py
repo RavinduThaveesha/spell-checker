@@ -1,7 +1,7 @@
-from . import logger
+import logger
 import nltk
 import re
-import time
+from time import time
 import json
 import operator
 
@@ -13,11 +13,10 @@ Dictionary bigramDict
 Dictionary lengthDict
 '''
 
-
 class SpellChecker:
 
     # dictionary path
-    __path = 'checker/dictionary.json'
+    __path = 'dictionary.json'
 
     # unigram dictionary attribute
     __unigramDict = {}
@@ -55,11 +54,12 @@ class SpellChecker:
 
     '''
     Normalize words
-    # remove special characters from start and end of word (Come? == come)
+    # remove special characters
     '''
 
     def normalize(self, word):
         # remove special characters from start and end of word
+        # logger.info('normalize %s word' % word)
         return re.sub(r'^\W+|\W+$', '', word.lower())
 
     '''
@@ -76,9 +76,8 @@ class SpellChecker:
         return candidates
 
     '''
-    Calculate candidates search range
-    # most of the spelling mistakes are between +- 2 edit distance therefore
-    # select search range (word +- 2)
+    Calculate search range
+    # word  +- 2
     '''
 
     def searchRange(self, word):
@@ -135,8 +134,9 @@ class SpellChecker:
     '''
 
     def check(self, text):
-        startTime = time.time()
-        words = text.split()  # split text into words
+        #startTime = time.time()
+        # split text into words
+        words = text.split()
         suggestions = {}
         preWord = ''
 
@@ -146,6 +146,9 @@ class SpellChecker:
             # check word present in dictionary - real word
             if word in self.__unigramDict.keys():
                 logger.info('checking real word error')
+
+                searchRange = self.searchRange(word)
+                print(searchRange)
 
                 if (iteration == 0):
                     preWord = word
@@ -159,7 +162,6 @@ class SpellChecker:
                         logger.info('word not in bigram %s ' % word)
                         # get candidate search range -+2 length
                         searchRange = self.searchRange(word)
-                        print(searchRange)
                         logger.info('looking for candidates in range %s ' % searchRange)
 
                         candidates = self.candidates(searchRange)
@@ -185,40 +187,45 @@ class SpellChecker:
                     suggestions[word] = self.process(candidates, word, preWord)
                     preWord = word
 
-        logger.info('executed in %s' % (time.time() - startTime))
+        # logger.info('executed in %s' % (time.time() - startTime))
         return self.result(suggestions)
 
     '''
-    Levenshtein edit distance implementation by Ben Langmead
-    # credit goes to: (Ben Langmead) http://www.cs.jhu.edu/~langmea/resources/lecture_notes/dp_and_edit_dist.pdf
+    Levenshtein edit distance
     # delete/insert = 1
     # subsitution = 2
     '''
     @staticmethod
-    def editDistance(x, y, cache=None):
+    def editDistance(w1, w2, cache=None):
         if cache is None:
             cache = {}
-        if len(x) == 0:
-            return len(y)
-        if len(y) == 0:
-            return len(x)
-        if (len(x), len(y)) in cache:
-            return cache[(len(x), len(y))]
+        if len(w1) == 0:
+            return len(w2)
+        if len(w2) == 0:
+            return len(w1)
+        if (len(w1), len(w2)) in cache:
+            return cache[(len(w1), len(w2))]
 
-        delt = 2 if x[-1] != y[-1] else 0
-        diag = SpellChecker.editDistance(x[:-1], y[:-1], cache) + delt
-        vert = SpellChecker.editDistance(x[:-1], y, cache) + 1
-        horz = SpellChecker.editDistance(x, y[:-1], cache) + 1
+        delta = 2 if w1[-1] != w2[-1] else 0
+        diag = SpellChecker.editDistance(w1[:-1], w2[:-1], cache) + delta
+        vert = SpellChecker.editDistance(w1[:-1], w2, cache) + 1
+        horz = SpellChecker.editDistance(w1, w2[:-1], cache) + 1
 
         distance = min(diag, vert, horz)
-        cache[(len(x), len(y))] = distance
+        cache[(len(w1), len(w2))] = distance
 
         return distance
 
     '''
-    Calculate conditional probability to find maximum likelihood
+    Language model
+    # bigram
     # P(Wi|Wi-1) = count(Wi-1, Wi)/count(Wi-1)
     '''
     @staticmethod
     def probability(x, y):
         return x / y
+
+
+s = SpellChecker()
+w = s.check('I am ol')
+print('1 %s' % w)

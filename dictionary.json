@@ -1,0 +1,1 @@
+{"unigram": {"hello": 1, "there": 1, "how": 1, "are": 1, "you": 1, "doing": 1, "today": 1}, "length": {"5": ["hello", "there", "doing", "today"], "3": ["how", "are", "you"]}, "bigram": {"hello": {"there": 1}, "there": {"how": 1}, "how": {"are": 1}, "are": {"you": 1}, "you": {"doing": 1}, "doing": {"today": 1}}}
