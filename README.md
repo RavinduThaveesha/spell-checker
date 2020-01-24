@@ -7,7 +7,14 @@ For words that seem to be incorrect, it suggest words that are similar and seem 
 
 This is a part of post graduate module project and bigram,unigram,dictionary lookup and probability techniques used to develop this class. 
 
+## How to use
 
+init SpellChecker class and call check method and provide text you want to check.
+`
+spellChecker = SpellChecker()
+w = spellChecker.check('I am ol')
+print('1 %s' % w)
+`
 
 
 
