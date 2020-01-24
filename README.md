@@ -5,7 +5,7 @@ It takes a given text string and checks its words against a dictionary of words 
 
 For words that seem to be incorrect, it suggest words that are similar and seem to be correct versions of those words.
 
-This is a part of post graduate module project and bigram,unigram,dictionary lookup and probability techniques used to develop this class. 
+This is a part of post graduate module(Natural Language Processing) project and bigram,unigram,dictionary lookup and probability techniques used to develop this class. 
 
 ## Process
 
