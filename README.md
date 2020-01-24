@@ -9,12 +9,19 @@ This is a part of post graduate module project and bigram,unigram,dictionary loo
 
 ## How to use
 
-init SpellChecker class and call check method and provide text you want to check.
-`
+Initialize SpellChecker class and call check method and provide text you want to check.
+
+```
 spellChecker = SpellChecker()
 w = spellChecker.check('I am ol')
 print('1 %s' % w)
-`
+```
+
+## Real world implementation
+
+Final solution develiered as a web app using django.
+
+
 
 
 
