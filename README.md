@@ -9,7 +9,7 @@ This is a part of post graduate module project and bigram,unigram,dictionary loo
 
 ## Process
 
-
+![Image of Process](https://user-images.githubusercontent.com/5220867/73066472-0e7f2a00-3ee1-11ea-8fa6-e8b222868b1b.png)
 
 ## How to use
 
@@ -25,7 +25,7 @@ print('1 %s' % w)
 
 Final solution develiered as a web app using django.
 
-
+![Image of Screenshot](https://user-images.githubusercontent.com/5220867/73066475-0f17c080-3ee1-11ea-812b-49f49132ffab.png)
 
 
 PHP non word error impletation of this class can be found here: https://www.phpclasses.org/package/11420-PHP-Detect-incorrectly-spelled-words-and-suggest-fixes.html
